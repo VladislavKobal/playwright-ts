@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "start": "npm run ./test/some.spec.ts"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/VladislavKobal/playwright-ts.git"
@@ -17,6 +19,7 @@
   "homepage": "https://github.com/VladislavKobal/playwright-ts#readme",
   "devDependencies": {
     "@playwright/test": "^1.40.1",
+    "@types/mocha": "^10.0.6",
     "@types/node": "^20.10.5"
   }
 }
