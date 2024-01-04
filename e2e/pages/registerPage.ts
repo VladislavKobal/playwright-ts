@@ -1,12 +1,13 @@
+import { time } from 'console';
 import { Page } from 'playwright';
 
 export class RegisterPage{
 
-
     constructor( public page: Page){
-
+        this.page = page;
     }
 
+    // Locators
     async enterFirstName(firstName:string): Promise <void>{
         await this.page.locator('#input-firstname')
     }
@@ -36,10 +37,20 @@ export class RegisterPage{
     }
     
     async clickPrivacyPolicy(){
-        await this.page.click('input[type="checkbox"]')
+        await this.page.locator("#input-agree")
+       
     }
-
+    //Actions
     async clickToContinue(){
         await this.page.click('input[value="Continue"]')
+    }
+    //Fill some data in field
+    async fillInForm(firstName,lastName,email,phone,password,confirmpassword){
+        await this.enterFirstName(firstName);
+        await this.enterLastName(lastName);
+        await this.enterEmail(email);
+        await this.enterPhone(phone);
+        await this.enterPassword(password);
+        await this.enterConfirmPassword(confirmpassword);
     }
 }

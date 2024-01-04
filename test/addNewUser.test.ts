@@ -1,21 +1,16 @@
 import { expect, test } from '@playwright/test';
-
 import { RegisterPage } from '../e2e/pages/registerPage';
 
-
-const email = "vlad@gmail.com"
-const password = "Vlad123@"
+const USER = {
+    email: "vlad@gmail.com",
+    password: 1111111111
+}
 
 test("Register test_1",async ({page}) => {
     const register = new RegisterPage(page);
+    //Open site
     await page.goto('https://ecommerce-playground.lambdatest.io/index.php?route=account/register')
-    await register.enterFirstName("Vlad");
-    await register.enterLastName("Kobal");   
-    await register.enterEmail(email);   
-    await register.enterPhone("1234567890");   
-    await register.enterPassword(password);   
-    await register.enterConfirmPassword(password);   
-    await register.clickPrivacyPolicy()
-    await register.clickToContinue();   
+    //fill some text into the field
+    await register.fillInForm("Vlad","Kobal", USER.email,"1111111111",USER.password,USER.password)
 
 })
