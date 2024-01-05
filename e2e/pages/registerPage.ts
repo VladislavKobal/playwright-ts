@@ -1,56 +1,37 @@
+import { Locator } from '@playwright/test';
 import { time } from 'console';
 import { Page } from 'playwright';
-
 export class RegisterPage{
+    firstName: Locator;
+    lastName: Locator;
+    email: Locator;
+    phone: Locator;
+    pwd: Locator;
+    confirmPwd: Locator;
+    policy: Locator;
 
     constructor( public page: Page){
         this.page = page;
+        this.firstName = this.page.locator('#input-firstname');
+        this.lastName = this.page.locator('#input-lastname');
+        this.email = this.page.locator('#input-email');
+        this.phone = this.page.locator('#input-telephone');
+        this.pwd = this.page.locator('#input-password');
+        this.confirmPwd = this.page.locator('#input-confirm');
+        this.policy = page.getByText('I have read and agree to the');
     }
 
-    // Locators
-    async enterFirstName(firstName:string): Promise <void>{
-        await this.page.locator('#input-firstname')
-    }
-
-    async enterLastName(lastName:string){
-        await this.page.locator('#input-lastname')
-    }
-
-    async enterEmail(email:string){
-        await this.page.locator('#input-email')
-    }
-    
-    async enterPhone(phone:string){
-        await this.page.locator('#input-telephone')
-    }
-
-    async enterPassword(password:string){
-        await this.page.locator('#input-password')
-    }
-    
-    async enterConfirmPassword(confirmpassword:string){
-        await this.page.locator('#input-confirm')
+    async visited(){
+        await this.page.goto('https://ecommerce-playground.lambdatest.io/index.php?route=account/register')
     }
 
     async isSubscribeChecked(){
         return await this.page.locator('#input-newsletter-no').isChecked()
     }
     
-    async clickPrivacyPolicy(){
-        await this.page.locator("#input-agree")
-       
-    }
     //Actions
-    async clickToContinue(){
+    async clickContinueButton(){
         await this.page.click('input[value="Continue"]')
     }
-    //Fill some data in field
-    async fillInForm(firstName,lastName,email,phone,password,confirmpassword){
-        await this.enterFirstName(firstName);
-        await this.enterLastName(lastName);
-        await this.enterEmail(email);
-        await this.enterPhone(phone);
-        await this.enterPassword(password);
-        await this.enterConfirmPassword(confirmpassword);
-    }
+
 }
