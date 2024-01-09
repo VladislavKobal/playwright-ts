@@ -28,10 +28,11 @@ export class RegisterPage{
     async isSubscribeChecked(){
         return await this.page.locator('#input-newsletter-no').isChecked()
     }
-    
+        
     //Actions
     async clickContinueButton(){
         await this.page.click('input[value="Continue"]')
     }
+
 
 }
