@@ -10,9 +10,9 @@ export class blogPage{
 
     constructor(public page: Page){
         this.page = page;
-        this.blog = this.page.getByRole('button', {name: 'Blog'});
-        this.addName = this.page.locator('#input-name');
-        this.addemail = this.page.locator('#input-email');
-        this.addComment = this.page.locator('#input-comment')
-        this.cButton = this.page.getByRole('link', { name: 'Blog', exact: true });
-        this.shitLocator = this.page.locator('#mz-article-tab-76210960-0').getByLabel('2 /').getByRole('link', { name: 'eget nunc lobortis mattis' }).first(); }}
+        this.blog = page.getByRole('button', {name: 'Blog'});
+        this.addName = page.locator('#input-name');
+        this.addemail = page.locator('#input-email');
+        this.addComment = page.locator('#input-comment')
+        this.cButton = page.getByRole('link', { name: 'Blog', exact: true });
+        this.shitLocator = page.locator('#mz-article-tab-76210960-0').getByLabel('2 /').getByRole('link', { name: 'eget nunc lobortis mattis' }).first(); }}

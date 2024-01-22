@@ -8,9 +8,11 @@ const randomEmail = faker.internet.email();
 const randomComment = faker.lorem.text();
 
 
-test("Register_User",async ({page}) => {
-    const addComment = new blogPage(page);
+test("Add comment",async ({page}) => {
+
     const visited = new LoginPage(page);
+    const addComment = new blogPage(page);
+
     await visited.mainPage();
     await addComment.cButton.click();
     await addComment.shitLocator.click();
