@@ -1,6 +1,6 @@
-import { faker } from "@faker-js/faker";
 import { Locator } from "@playwright/test";
 import { Page } from "playwright";
+import { RegisterNewUser } from "./helpers";
 
 export class RegisterPage {
   firstName: Locator;
@@ -27,13 +27,13 @@ export class RegisterPage {
       "https://ecommerce-playground.lambdatest.io/index.php?route=account/register"
     );
   }
-  async fillForm(fName, lName, eEmail, pPhone, pPwd, cPwd) {
-    await this.firstName.fill(fName);
-    await this.lastName.fill(lName);
-    await this.email.fill(eEmail);
-    await this.phone.fill(pPhone);
-    await this.pwd.fill(pPwd);
-    await this.confirmPwd.fill(cPwd);
+  async fillForm(details: RegisterNewUser) {
+    await this.firstName.fill(details.firstName);
+    await this.lastName.fill(details.lastName);
+    await this.email.fill(details.email);
+    await this.phone.fill(details.phone);
+    await this.pwd.fill(details.password);
+    await this.confirmPwd.fill(details.confirmPassword);
   }
   async isSubscribeChecked() {
     return await this.page.locator("#input-newsletter-no").isChecked();
@@ -49,11 +49,3 @@ export class RegisterPage {
     await this.page.getByRole("link", { name: " Logout" }).click();
   }
 }
-
-export const regUser = {
-  name: faker.company.name(),
-  secondName: faker.company.name(),
-  email: faker.internet.email(),
-  phone: faker.phone.number(),
-  pwd: faker.internet.password(),
-};

@@ -1,12 +1,10 @@
-import { RegisterPage, regUser } from "../e2e/pages/registerPage";
+import { RegisterPage } from "../e2e/pages/registerPage";
 import { AddProduct } from "../e2e/pages/addProduct";
 import { LoginPage, loginWithCredential } from "../e2e/pages/loginPage";
 import { test, Page } from "@playwright/test";
-import {
-  checkoutProductPage,
-  personalDetails,
-} from "../e2e/pages/checkoutPage";
-import path from "path";
+import { checkoutProductPage } from "../e2e/pages/checkoutPage";
+import { RandomDataForFillField } from "../e2e/pages/helpers";
+import { getUserData } from "../e2e/pages/helpers";
 
 test.describe.configure({ mode: "serial" });
 
@@ -22,14 +20,7 @@ test.describe(() => {
     //link to site
     await register.visited();
     //fill data into form
-    await register.fillForm(
-      regUser.name,
-      regUser.secondName,
-      regUser.email,
-      regUser.phone,
-      regUser.pwd,
-      regUser.pwd
-    );
+    await register.fillForm(getUserData());
     await register.isSubscribeChecked();
     await register.clickPolicyButton();
     await register.clickContinueButton();
@@ -61,15 +52,7 @@ test.describe(() => {
     await checkoutAction.mainPage();
     await checkoutAction.basket();
     await checkoutAction.checKout();
-    await checkoutAction.fillPersonalDetails(
-      personalDetails.name,
-      personalDetails.lname,
-      personalDetails.email,
-      personalDetails.phone,
-      personalDetails.addres1,
-      personalDetails.addres2,
-      personalDetails.postcode
-    );
+    await checkoutAction.fillPersonalDetails(RandomDataForFillField);
     await checkoutAction.acceptPrivacy();
     await page.pause();
     await checkoutAction.continueB();

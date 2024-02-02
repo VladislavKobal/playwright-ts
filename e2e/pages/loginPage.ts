@@ -1,18 +1,17 @@
 import { Locator, Page } from "@playwright/test";
 
 export class LoginPage {
-  myAccount: Locator;
-  email: Locator;
-  pwd: Locator;
-  loginButton: Locator;
+  private page: Page;
 
-  constructor(public page: Page) {
-    this.page = page;
+  private email: Locator;
+  private pwd: Locator;
+
+  constructor(page: Page) {
     this.email = page.locator("#input-email");
     this.pwd = page.locator("#input-password");
   }
 
-  async mainPage() {
+  async visitedHomePage() {
     await this.page.goto(
       "https://ecommerce-playground.lambdatest.io/index.php?route=common/home"
     );

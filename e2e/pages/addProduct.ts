@@ -1,46 +1,31 @@
 import { Locator, Page } from "@playwright/test";
 
 export class AddProduct {
-  bannerPhoto: Locator;
-  increaseButton: Locator;
-  addToCardButton: Locator;
-  checkoutButton: Locator;
+  private page: Page;
 
-  constructor(public page: Page) {
-    this.page = page;
+  private bannerPhoto: Locator;
+  private increaseButton: Locator;
+  private addToCardButton: Locator;
+  private checkoutButton: Locator;
+
+  constructor(page: Page) {
     this.increaseButton = page.getByRole("button", {
       name: "Increase quantity",
     });
     this.addToCardButton = page.getByRole("button", {
       name: "Add to Cart",
     });
-
-    console.log(this.increaseButton);
   }
-  async clickLinePhone() {
+
+  async clickOnImageIphone() {
     await this.page.getByRole("link", { name: "Iphone 11 pro max" }).click();
   }
-  async clickIncreaseButton(n: number): Promise<void> {
-    /*  const res = await this.page
-      .getByRole("button", {
-        name: "Increase quantity",
-      })
-      .click({ clickCount: n });
-
-    console.log(res);*/
-    // const numArr = Array.from(Array(n).keys());
-
-    // for (const item of numArr) {
-    //   console.log("click item: ", item);
-    //   const res = await this.increaseButton.click();
-
-    //   console.log("btn click res: ", res);
-    // }
+  async clickOnIncreaseButton(n: number): Promise<void> {
     for (let i = 0; i < n; i++) {
       await this.increaseButton.click();
     }
   }
-  async addToCart() {
+  async clickOnAddToCart() {
     await this.addToCardButton.click();
   }
 }

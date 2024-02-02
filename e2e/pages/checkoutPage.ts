@@ -1,22 +1,19 @@
-import { Locator, Page, test } from "@playwright/test";
-import { faker } from "@faker-js/faker";
+import { Locator, Page } from "@playwright/test";
+import { PersonalDetails } from "./helpers";
 
 export class checkoutProductPage {
-  clickBasket: Locator;
-  clickCheckoutButton: Locator;
-  clickToGuest: Locator;
-  firstName: Locator;
-  lastName: Locator;
-  emailField: Locator;
-  telephoneF: Locator;
-  loginButton: Locator;
-  addresF: Locator;
-  addresL: Locator;
-  postCode: Locator;
-  privace: Locator;
+  private page: Page;
 
-  constructor(public page: Page) {
-    this.page = page;
+  private clickToGuest: Locator;
+  private firstName: Locator;
+  private lastName: Locator;
+  private emailField: Locator;
+  private telephoneF: Locator;
+  private addresF: Locator;
+  private addresL: Locator;
+  private postCode: Locator;
+
+  constructor(page: Page) {
     this.clickToGuest = page
       .locator("label")
       .filter({ hasText: "Guest Checkout" });
@@ -27,54 +24,35 @@ export class checkoutProductPage {
     this.addresF = page.locator("#input-login-email");
     this.addresL = page.locator("#input-login-email");
     this.postCode = page.locator("#input-login-password");
-
-    this.loginButton = page.locator("#button-save");
   }
 
-  async mainPage() {
+  async visitedHomePage() {
     await this.page.goto(
       "https://ecommerce-playground.lambdatest.io/index.php?route=common/home"
     );
   }
-  async basket() {
+  async clickOnBacketIcon() {
     await this.page.getByRole("button", { name: "2" }).click();
   }
-  async checKout() {
+  async clickOnCheckoutButton() {
     await this.page.getByRole("button", { name: " Checkout" }).click();
   }
 
-  async fillPersonalDetails(
-    fName,
-    lName,
-    eEmail,
-    pPhone,
-    aDress,
-    aDress2,
-    postCode
-  ) {
-    await this.firstName.fill(fName);
-    await this.lastName.fill(lName);
-    await this.emailField.fill(eEmail);
-    await this.telephoneF.fill(pPhone);
-    await this.addresF.fill(aDress);
-    await this.addresL.fill(aDress2);
-    await this.postCode.fill(postCode);
+  async fillPersonalDetails(details: PersonalDetails) {
+    await this.firstName.fill(details.firstName);
+    await this.lastName.fill(details.lastName);
+    await this.emailField.fill(details.email);
+    await this.telephoneF.fill(details.phone);
+    await this.addresF.fill(details.address);
+    await this.addresL.fill(details.address2);
+    await this.postCode.fill(details.postCode);
   }
   async acceptPrivacy() {
     await this.page
       .getByText("I have read and agree to the Terms & Conditions")
       .click();
   }
-  async continueB() {
+  async clickOnContinueButton() {
     await this.page.getByRole("button", { name: "Continue " }).click();
   }
 }
-export const personalDetails = {
-  name: faker.company.name(),
-  lname: faker.company.name(),
-  email: faker.internet.email(),
-  phone: faker.phone.number(),
-  addres1: faker.company.name(),
-  addres2: faker.company.name(),
-  postcode: faker.number.int(),
-};

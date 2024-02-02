@@ -1,9 +1,10 @@
 import { Page } from "@playwright/test";
 
 export class HomePage {
-  constructor(public page: Page) {}
+  private page: Page;
 
-  //Actions
+  constructor(page: Page) {}
+
   async clickHomePage() {
     await this.page.getByRole("link", { name: "Home" }).click();
   }
