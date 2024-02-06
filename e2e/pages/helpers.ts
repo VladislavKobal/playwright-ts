@@ -1,6 +1,6 @@
 import { faker } from "@faker-js/faker";
 
-export type RegisterNewUser = {
+export type RegistrationFormData = {
   firstName: string;
   lastName: string;
   email: string;
@@ -9,7 +9,7 @@ export type RegisterNewUser = {
   confirmPassword: string;
 };
 
-export function getUserData(): RegisterNewUser {
+export function getUserData(): RegistrationFormData {
   const password = faker.internet.password();
 
   return {
@@ -22,7 +22,7 @@ export function getUserData(): RegisterNewUser {
   };
 }
 
-export type PersonalDetails = {
+export type PersonalDetailsData = {
   firstName: string;
   lastName: string;
   email: string;
@@ -32,7 +32,7 @@ export type PersonalDetails = {
   postCode: string;
 };
 
-export const RandomDataForFillField: PersonalDetails = {
+export const generateRandomUserData: PersonalDetailsData = {
   firstName: faker.company.name(),
   lastName: faker.company.name(),
   email: faker.internet.email(),
@@ -40,4 +40,13 @@ export const RandomDataForFillField: PersonalDetails = {
   address: faker.company.name(),
   address2: faker.company.name(),
   postCode: faker.number.int().toString(),
+};
+
+export type LoginWithCreatedUser = {
+  emailInput: string;
+  passwordInput: string;
+};
+export const loginWithCredential: LoginWithCreatedUser = {
+  emailInput: "test1Q@gmail.com",
+  passwordInput: "1111111111",
 };

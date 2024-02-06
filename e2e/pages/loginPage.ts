@@ -1,34 +1,36 @@
 import { Locator, Page } from "@playwright/test";
+import { LoginWithCreatedUser } from "./helpers";
 
 export class LoginPage {
   private page: Page;
 
-  private email: Locator;
-  private pwd: Locator;
+  private emailInput: Locator;
+  private passwordInput: Locator;
+  private clickHomePage: Locator;
+  private loginButton: Locator;
 
   constructor(page: Page) {
-    this.email = page.locator("#input-email");
-    this.pwd = page.locator("#input-password");
+    this.page = page;
+
+    this.emailInput = page.locator("#input-email");
+    this.passwordInput = page.locator("#input-password");
+    this.clickHomePage = page.getByRole("button", { name: " My account" });
+    this.loginButton = page.getByRole("button", { name: "Login" });
   }
 
-  async visitedHomePage() {
+  async visited() {
     await this.page.goto(
       "https://ecommerce-playground.lambdatest.io/index.php?route=common/home"
     );
   }
-  async clickMainPage() {
-    await this.page.getByRole("button", { name: " My account" }).click();
+  async clickMainPage(): Promise<void> {
+    await this.clickHomePage.click();
   }
-  async fillLoginField(eEmail, pPwd) {
-    await this.email.fill(eEmail);
-    await this.pwd.fill(pPwd);
+  async fillLoginForm(detail: LoginWithCreatedUser): Promise<void> {
+    await this.emailInput.fill(detail.emailInput);
+    await this.passwordInput.fill(detail.passwordInput);
   }
-  async clickLoginButton() {
-    await this.page.getByRole("button", { name: "Login" }).click();
+  async clickLoginButton(): Promise<void> {
+    await this.loginButton.click();
   }
 }
-
-export const loginWithCredential = {
-  email: "test1Q@gmail.com",
-  pwd: "1111111111",
-};
