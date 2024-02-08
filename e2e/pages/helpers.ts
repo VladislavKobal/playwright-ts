@@ -50,3 +50,8 @@ export const loginWithCredential: LoginWithCreatedUser = {
   emailInput: "test1Q@gmail.com",
   passwordInput: "1111111111",
 };
+
+export const loginWithBadCredential: LoginWithCreatedUser = {
+  emailInput: "testQ@gmail.com",
+  passwordInput: "111111111",
+};

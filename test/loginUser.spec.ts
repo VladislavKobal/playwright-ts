@@ -13,7 +13,15 @@ test.describe(() => {
   });
 
   test("Login with bad cred", async () => {
-    //to be developed
+    const authorization = new LoginPage(page);
+
+    await authorization.visited();
+    await authorization.clickMainPage();
+    await authorization.fillLoginForm(loginWithCredential);
+    await authorization.clickLoginButton();
+    await expect(
+      page.getByText(" Warning: No match for E-Mail Address and/or Password.")
+    ).toBeVisible();
   });
 
   test("Login with good credential", async () => {
